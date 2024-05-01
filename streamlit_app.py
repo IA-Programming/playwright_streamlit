@@ -7,7 +7,7 @@ from playwright.async_api import async_playwright
 """
 \## Web scraping on Streamlit Cloud with Playwright
 
-\[!\[Source\](https://img.shields.io/badge/View-Source-<COLOR>.svg)\](https://github.com/your-repo/streamlit-playwright/)
+[![Source](https://img.shields.io/badge/View-Source-<COLOR>.svg)](https://github.com/IA-Programming/playwright_streamlit/)
 
 This is a minimal, reproducible example of how to scrape the web with Playwright on Streamlit's Community Cloud.
 
@@ -17,15 +17,15 @@ Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart
 with st.echo():
 
     @st.cache_resource
-    def get_browser():
-        playwright = asyncio.get_event_loop().run_until_complete(async_playwright().start())
-        browser = asyncio.get_event_loop().run_until_complete(playwright.chromium.launch())
+    async def get_browser():
+        playwright = await async_playwright().start()
+        browser = await playwright.chromium.launch()
         return browser
 
     browser = get_browser()
 
     @st.cache_data
-    async def ExtrayendoHTML(Url: str, browser=browser):
+    async def ExtrayendoHTML(Url: str, browser=None):
         response = requests.get(Url)
 
         # Check if the request was successful (status code 200)
@@ -65,9 +65,10 @@ with st.echo():
                 return result, html_code
 
     async def main():
+        browser = await get_browser()
         if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="test"):
             start_time = time()
-            result, html = await ExtrayendoHTML(Url=url)
+            result, html = await ExtrayendoHTML(Url=url, browser=browser)
             st.markdown(result)
             st.code(html)
             elapsed_time = time() - start_time
