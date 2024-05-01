@@ -1,1 +1,39 @@
+# Ignore the virtual environment
+venv
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg-info
+.eggs
+.cache
+.pytest_cache
+.mypy_cache
+.tox
+.venv
+.env
+.env.*
+env/
+venv/
+.env.bak
+.env.example
+.env.prod
+.env.staging
+.env.test
 
+# Ignore the app.py file after it's been copied
+streamlit_app.py
+
+# Ignore any IDE or editor files
+.vscode
+.pycharm
+.idea
+
+# Ignore any log files
+*.log
+
+# Ignore any other files that shouldn't be copied to the image
+*.git
+*.gitignore
+*.md
+*.txt
