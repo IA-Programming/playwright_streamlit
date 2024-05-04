@@ -5,7 +5,7 @@ import asyncio
 from playwright.async_api import async_playwright
 
 """
-\## Web scraping on Streamlit Cloud with Playwright
+## Web scraping on Streamlit Cloud with Playwright
 
 [![Source](https://img.shields.io/badge/View-Source-<COLOR>.svg)](https://github.com/IA-Programming/playwright_streamlit/)
 
@@ -22,10 +22,7 @@ with st.echo():
         browser = await playwright.chromium.launch()
         return browser
 
-    browser = get_browser()
-
-    @st.cache_data
-    async def ExtrayendoHTML(Url: str, browser=None):
+    async def ExtrayendoHTML(_browser, Url: str):
         response = requests.get(Url)
 
         # Check if the request was successful (status code 200)
@@ -38,7 +35,7 @@ with st.echo():
             result = 'Using Playwright'
             print('\033[1;33m' + result + '\033[0m')
 
-            page = await browser.new_page()
+            page = await _browser.new_page()
 
             # Load the webpage
             await page.goto(Url)
@@ -65,10 +62,10 @@ with st.echo():
                 return result, html_code
 
     async def main():
-        browser = await get_browser()
+        browser = get_browser()
         if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="test"):
             start_time = time()
-            result, html = await ExtrayendoHTML(Url=url, browser=browser)
+            result, html = await ExtrayendoHTML(_browser=browser,Url=url)
             st.markdown(result)
             st.code(html)
             elapsed_time = time() - start_time
