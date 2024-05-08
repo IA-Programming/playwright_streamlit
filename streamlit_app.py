@@ -16,7 +16,6 @@ Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart
 
 with st.echo():
 
-    @st.cache_resource
     async def get_browser():
         playwright = await async_playwright().start()
         browser = await playwright.chromium.launch()
@@ -62,7 +61,8 @@ with st.echo():
                 return result, html_code
 
     async def main():
-        browser = get_browser()
+        browser = await get_browser()
+        
         if url := st.text_input(label="put the url that you want you extract the html code", value="http://example.com", max_chars=100, help="test"):
             start_time = time()
             result, html = await ExtrayendoHTML(_browser=browser,Url=url)

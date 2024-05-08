@@ -4,7 +4,7 @@ Streamlit project to try to get playwright running on streamlit cloud.
 
 # Web scraping on Streamlit Cloud with Playwright
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://playwright.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://playwrightapp.streamlit.app/)
 
 This is a minimal, reproducible example of how to scrape the web with playwright and Chrome on Streamlit's Community Cloud. 
 
